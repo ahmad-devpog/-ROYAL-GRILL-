@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmad's Royal Grill | Premium Fast Food Delivery</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #FF4500; /* Vibrant Food Orange/Red */
+      --primary-hover: #E03E00;
+      --bg-color: #0F0F11;
+      --surface: #1C1C1E;
+      --surface-border: rgba(255, 255, 255, 0.08);
+      --text: #F8F9FA;
+      --muted: #A1A1AA;
+      --accent: #FFB800; /* Mustard Yellow */
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --radius: 16px;
+      --transition: all 0.3s ease;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-color);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5 { font-family: var(--font-heading); color: #fff; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .text-primary { color: var(--primary); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4); }
+    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 69, 0, 0.6); }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid var(--surface-border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 16px 0;
+      background: rgba(15, 15, 17, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--surface-border);
+      transition: var(--transition);
+    }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: var(--font-heading); font-size: 26px; font-weight: 900; letter-spacing: -0.5px; }
+    .logo i { color: var(--primary); }
+    
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-weight: 600; font-size: 15px; transition: var(--transition); }
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-actions { display: flex; gap: 16px; align-items: center; }
+    .cart-btn {
+      background: var(--surface);
+      color: #fff;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--surface-border);
+      position: relative;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .cart-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .cart-badge {
+      position: absolute; top: -5px; right: -5px;
+      background: var(--primary); color: #fff;
+      font-size: 11px; font-weight: 800;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 80px;
+      background: radial-gradient(circle at top right, rgba(255, 69, 0, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at bottom left, rgba(255, 184, 0, 0.1) 0%, transparent 50%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(255, 69, 0, 0.1);
+      color: var(--primary);
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 69, 0, 0.2);
+    }
+    .hero h1 { font-size: clamp(3.5rem, 6vw, 5rem); line-height: 1.05; margin-bottom: 24px; letter-spacing: -1.5px; }
+    .hero p { font-size: 18px; color: var(--muted); margin-bottom: 40px; max-width: 500px; }
+    .hero-img-box { position: relative; }
+    .hero-img-box img { width: 100%; border-radius: 30px; transform: rotate(-2deg); box-shadow: var(--shadow); transition: var(--transition); }
+    .hero-img-box img:hover { transform: rotate(0) scale(1.02); }
+
+    /* Floating Tags on Hero Image */
+    .float-tag {
+      position: absolute;
+      background: var(--surface);
+      padding: 12px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--surface-border);
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      animation: float 4s ease-in-out infinite;
+    }
+    .tag-1 { top: 10%; left: -20px; }
+    .tag-2 { bottom: 15%; right: -20px; animation-delay: 2s; }
+    .float-tag i { font-size: 24px; color: var(--accent); }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+    /* Menu Section */
+    .menu-section { padding: 100px 0; background: #131315; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-header h2 { font-size: 42px; margin-bottom: 16px; }
+    .section-header p { color: var(--muted); font-size: 18px; max-width: 600px; margin: 0 auto; }
+
+    .category-title {
+      font-size: 32px;
+      margin: 60px 0 30px 0;
+      display: flex; align-items: center; gap: 16px;
+      padding-bottom: 15px; border-bottom: 1px solid var(--surface-border);
+    }
+    .category-title i { color: var(--primary); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 30px;
+    }
+
+    /* Menu Card styling akin to Top Delivery Apps */
+    .food-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--surface-border);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex; flex-direction: column;
+    }
+    .food-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+      border-color: rgba(255, 69, 0, 0.3);
+    }
+    .card-img {
+      width: 100%; height: 240px;
+      object-fit: cover;
+      position: relative;
+    }
+    .card-tag {
+      position: absolute; top: 16px; left: 16px;
+      background: var(--accent); color: #000;
+      padding: 6px 12px; border-radius: 8px;
+      font-size: 13px; font-weight: 800; font-family: var(--font-heading);
+    }
+    .card-body { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .food-title { font-size: 22px; font-weight: 800; }
+    .food-price { font-size: 24px; font-weight: 900; color: var(--primary); font-family: var(--font-heading); }
+    .food-desc { color: var(--muted); font-size: 15px; margin-bottom: 24px; line-height: 1.5; flex-grow: 1; }
+    
+    .card-action {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 16px; border-top: 1px solid var(--surface-border);
+    }
+    .add-btn {
+      background: rgba(255, 255, 255, 0.05); color: #fff;
+      border: none; padding: 10px 20px; border-radius: 8px;
+      font-weight: 600; font-family: var(--font-body);
+      cursor: pointer; transition: var(--transition);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .add-btn:hover { background: var(--primary); box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4); }
+
+    /* Order / Booking Section */
+    .order-section { padding: 100px 0; }
+    .order-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 30px;
+      padding: 60px;
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px;
+      box-shadow: var(--shadow);
+    }
+    .order-info h2 { font-size: 40px; margin-bottom: 20px; }
+    .order-info p { color: var(--muted); font-size: 16px; margin-bottom: 40px; }
+    
+    .contact-block { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .contact-block i { width: 50px; height: 50px; background: rgba(255, 69, 0, 0.1); color: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .contact-block h4 { font-size: 14px; color: var(--muted); margin: 0 0 4px 0; font-family: var(--font-body); }
+    .contact-block p { font-size: 18px; font-weight: 700; color: #fff; margin:0; font-family: var(--font-heading); }
+
+    .order-form { display: flex; flex-direction: column; gap: 20px; }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    label { font-size: 14px; font-weight: 600; color: var(--muted); }
+    input, textarea, select {
+      background: rgba(0, 0, 0, 0.3); border: 1px solid var(--surface-border);
+      color: #fff; padding: 16px; border-radius: 12px;
+      font-family: var(--font-body); font-size: 15px; transition: var(--transition);
+    }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.15); }
+    .order-form button { padding: 18px; font-size: 18px; margin-top: 10px; }
+
+    /* Floating WhatsApp Button */
+    .floating-wa {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      background-color: #25D366; color: white;
+      width: 65px; height: 65px;
+      border-radius: 50%;
+      display: flex; justify-content: center; align-items: center;
+      font-size: 34px;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+    .floating-wa:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6); }
+
+    /* Footer */
+    footer { background: #0A0A0B; padding: 60px 0 30px 0; border-top: 1px solid var(--surface-border); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; margin-bottom: 50px; }
+    .footer-col h3 { font-size: 20px; margin-bottom: 24px; }
+    .footer-col a { display: block; color: var(--muted); margin-bottom: 12px; transition: var(--transition); }
+    .footer-col a:hover { color: var(--primary); padding-left: 5px; }
+    .social-links { display: flex; gap: 16px; margin-top: 24px; }
+    .social-links a { width: 40px; height: 40px; border-radius: 50%; background: var(--surface); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; padding: 0; }
+    .social-links a:hover { background: var(--primary); }
+    .footer-bottom { text-align: center; color: var(--muted); padding-top: 30px; border-top: 1px solid var(--surface-border); font-size: 14px; }
+
+    /* Responsive */
+    .mobile-btn { display: none; background: transparent; border: none; color: #fff; font-size: 24px; cursor: pointer; }
+    @media (max-width: 992px) {
+      .hero-grid, .order-wrapper, .footer-grid { grid-template-columns: 1fr; }
+      .hero { text-align: center; padding-top: 120px; }
+      .hero p { margin: 0 auto 40px auto; }
+      .float-tag { display: none; }
+      .input-row { grid-template-columns: 1fr; }
+      .order-wrapper { padding: 40px 24px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; } /* Mobile menu simplified */
+      .mobile-btn { display: block; }
+      .hero h1 { font-size: 2.5rem; }
+      .floating-wa { width: 55px; height: 55px; font-size: 28px; bottom: 20px; right: 20px; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/923177021102" class="floating-wa" target="_blank" title="Order via WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo"><i class="fa-solid fa-fire"></i> ROYAL GRILL</a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#menu">Top Menu</a>
+        <a href="#burgers">Burgers</a>
+        <a href="#pizzas">Pizzas</a>
+        <a href="#order">Place Order</a>
+      </div>
+      <div class="nav-actions">
+        <div class="cart-btn" onclick="document.querySelector('#order').scrollIntoView();">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-badge">3</span>
+        </div>
+        <button class="mobile-btn"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">🔥 #1 Trending Delivery in Dubai</div>
+        <h1>The Ultimate <span class="text-primary">Fast Food</span> Experience.</h1>
+        <p>Premium flame-grilled burgers, authentic stone-baked pizzas, and crispy sides delivered hot and fresh directly to your doorstep in Riyadh and Dubai.</p>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+          <a href="#menu" class="btn btn-primary"><i class="fa-solid fa-utensils"></i> Explore Menu</a>
+          <a href="#order" class="btn btn-outline"><i class="fa-solid fa-motorcycle"></i> Order Online</a>
+        </div>
+      </div>
+      <div class="hero-img-box">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000&auto=format&fit=crop" alt="Premium Burger">
+        <div class="float-tag tag-1"><i class="fa-solid fa-star"></i> 4.9/5 Rating</div>
+        <div class="float-tag tag-2"><i class="fa-solid fa-stopwatch"></i> 30 Min Delivery</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="menu-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Famous Categories</h2>
+        <p>Handcrafted by expert chefs using 100% premium quality local ingredients. Choose from our top trending categories below.</p>
+      </div>
+
+      <!-- BURGERS (3 Items) -->
+      <h3 class="category-title" id="burgers"><i class="fa-solid fa-burger"></i> Signature Burgers</h3>
+      <div class="menu-grid">
+        <div class="food-card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1000&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover;" alt="Burger"></div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="food-title">Royal Beef Classic</h4>
+              <span class="food-price">45 SAR</span>
+            </div>
+            <p class="food-desc">Double flame-grilled Angus beef patty, melted cheddar, fresh lettuce, tomato, and Ahmad's secret royal sauce.</p>
+            <div class="card-action">
+              <span style="color:var(--muted); font-size:14px;"><i class="fa-solid fa-fire"></i> 850 Cal</span>
+              <button class="add-btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="food-card">
+          <div class="card-tag">Bestseller</div>
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1594212265934-7dc41c2c31e9?q=80&w=1000&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover;" alt="Burger"></div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="food-title">Crispy Zinger Pro</h4>
+              <span class="food-price">38 SAR</span>
+            </div>
+            <p class="food-desc">Spicy deep-fried crunchy chicken breast, jalapeños, crispy onions, and creamy ranch on a toasted brioche bun.</p>
+            <div class="card-action">
+              <span style="color:var(--muted); font-size:14px;"><i class="fa-solid fa-fire"></i> 720 Cal</span>
+              <button class="add-btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="food-card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1586816001966-79b736744398?q=80&w=1000&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover;" alt="Burger"></div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="food-title">Smokey BBQ Angus</h4>
+              <span class="food-price">42 SAR</span>
+            </div>
+            <p class="food-desc">Premium Angus beef smothered in rich smokey BBQ sauce, topped with American cheese and crispy bacon strips.</p>
+            <div class="card-action">
+              <span style="color:var(--muted); font-size:14px;"><i class="fa-solid fa-fire"></i> 910 Cal</span>
+              <button class="add-btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PIZZAS (3 Items) -->
+      <h3 class="category-title" id="pizzas" style="margin-top: 80px;"><i class="fa-solid fa-pizza-slice"></i> Stone-Baked Pizzas</h3>
+      <div class="menu-grid">
+        <div class="food-card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1000&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover;" alt="Pizza"></div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="food-title">Margherita Royal</h4>
+              <span class="food-price">55 SAR</span>
+            </div>
+            <p class="food-desc">Classic Italian thin crust loaded with fresh premium mozzarella, San Marzano tomato sauce, and fresh basil leaves.</p>
+            <div class="card-action">
+              <span style="color:var(--muted); font-size:14px;"><i class="fa-solid fa-fire"></i> 1200 Cal</span>
+              <button class="add-btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="food-card">
+          <div class="card-tag">Chef's Special</div>
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1000&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover;" alt="Pizza"></div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="food-title">BBQ Chicken Supreme</h4>
+              <span class="food-price">65 SAR</span>
+            </div>
+            <p class="food-desc">Grilled chicken chunks, red onions, bell peppers, mozzarella, and a generous drizzle of our signature BBQ sauce.</p>
+            <div class="card-action">
+              <span style="color:var(--muted); font-size:14px;"><i class="fa-solid fa-fire"></i> 1450 Cal</span>
+              <button class="add-btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="food-card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=1000&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover;" alt="Pizza"></div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="food-title">Pepperoni Overload</h4>
+              <span class="food-price">58 SAR</span>
+            </div>
+            <p class="food-desc">Crispy edge-to-edge beef pepperoni overlapping on a thick layer of melted Italian cheeses and spicy marinara.</p>
+            <div class="card-action">
+              <span style="color:var(--muted); font-size:14px;"><i class="fa-solid fa-fire"></i> 1380 Cal</span>
+              <button class="add-btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDES & DRINKS (3 Items) -->
+      <h3 class="category-title" id="sides" style="margin-top: 80px;"><i class="fa-solid fa-martini-glass-citrus"></i> Sides & Beverages</h3>
+      <div class="menu-grid">
+        <div class="food-card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?q=80&w=1000&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover;" alt="Fries"></div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="food-title">Signature Loaded Fries</h4>
+              <span class="food-price">25 SAR</span>
+            </div>
+            <p class="food-desc">Crispy golden fries topped with thick melted cheese sauce, jalapeños, and crunchy chicken bites.</p>
+            <div class="card-action">
+              <span style="color:var(--muted); font-size:14px;"><i class="fa-solid fa-fire"></i> 650 Cal</span>
+              <button class="add-btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="food-card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1639024471283-03518883512d?q=80&w=1000&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover;" alt="Onion Rings"></div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="food-title">Crispy Onion Rings</h4>
+              <span class="food-price">18 SAR</span>
+            </div>
+            <p class="food-desc">Thick-cut sweet onion rings, double battered and fried to a perfect golden crunch. Served with garlic mayo.</p>
+            <div class="card-action">
+              <span style="color:var(--muted); font-size:14px;"><i class="fa-solid fa-fire"></i> 420 Cal</span>
+              <button class="add-btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="food-card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1000&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover;" alt="Mojito"></div>
+          <div class="card-body">
+            <div class="card-header">
+              <h4 class="food-title">Mint Mojito Cooler</h4>
+              <span class="food-price">20 SAR</span>
+            </div>
+            <p class="food-desc">Refreshing ice-cold sparkling mojito with freshly muddled mint leaves and zesty lemon wedges. The perfect pair.</p>
+            <div class="card-action">
+              <span style="color:var(--muted); font-size:14px;"><i class="fa-solid fa-fire"></i> 150 Cal</span>
+              <button class="add-btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Online Order / Checkout Section -->
+  <section id="order" class="order-section">
+    <div class="container">
+      <div class="order-wrapper">
+        <div class="order-info">
+          <h2>Express Online Delivery</h2>
+          <p>Skip the wait and order directly to your location in Saudi Arabia or the UAE. Fill out the form or hit the WhatsApp button for instant support.</p>
+          
+          <div class="contact-block">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <h4>Order via Call</h4>
+              <p>+92 317 7021102</p>
+            </div>
+          </div>
+          <div class="contact-block">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+              <h4>Email Support</h4>
+              <p>ahmadrasheed.com02@gmail.com</p>
+            </div>
+          </div>
+          <div class="contact-block">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <h4>Main Kitchens</h4>
+              <p>Riyadh (KSA) & Dubai (UAE)</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Form targeting Formspree / or acts as Portfolio UI -->
+          <form class="order-form" action="https://formspree.io/f/mvzvarqo" method="POST">
+            <div class="input-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="First Name" placeholder="Ahmad" required>
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="Phone" placeholder="+92 317 7021102" required>
+              </div>
+            </div>
+            <div class="input-row">
+              <div class="form-group">
+                <label>City & Location</label>
+                <select name="City" required>
+                  <option value="" disabled selected>Select City...</option>
+                  <option value="Riyadh">Riyadh, KSA</option>
+                  <option value="Jeddah">Jeddah, KSA</option>
+                  <option value="Dubai">Dubai, UAE</option>
+                  <option value="Abu Dhabi">Abu Dhabi, UAE</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Complete Address</label>
+                <input type="text" name="Address" placeholder="Street, Building, Apt no." required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Your Order Details</label>
+              <textarea name="Order Details" rows="4" placeholder="E.g., 2x Royal Beef Burger, 1x Margherita Pizza..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 12px;">Confirm Order 🚀</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col" style="padding-right: 40px;">
+        <h2 class="logo" style="margin-bottom: 16px;"><i class="fa-solid fa-fire"></i> ROYAL GRILL</h2>
+        <p style="color: var(--muted); line-height: 1.6;">A modern, premium portfolio template developed by Ahmad. Experience the highest quality UI/UX built for the food industry across the Middle East.</p>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Fast Links</h3>
+        <a href="#home">Home</a>
+        <a href="#menu">Top Categories</a>
+        <a href="#order">Place an Order</a>
+        <a href="#pizzas">Pizza Deals</a>
+      </div>
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Refund Policy</a>
+        <div style="margin-top: 20px; color: #fff;">
+          <strong>Developed by:</strong><br>
+          <span style="color: var(--primary);">Ahmad Rasheed</span>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Ahmad World Portfolio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple Sticky Nav Script
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.style.background = 'rgba(15, 15, 17, 0.98)';
+        nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+      } else {
+        nav.style.background = 'rgba(15, 15, 17, 0.85)';
+        nav.style.boxShadow = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
